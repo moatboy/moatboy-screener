@@ -1,6 +1,11 @@
 import altair as alt
 import pandas as pd
 import streamlit as st
+import yfinance as yf
+
+def get_market_cap(ticker):
+    stock = yf.Ticker(ticker)
+    return stock.info['marketCap'] if 'marketCap' in stock.info else None
 
 # Show the page title and description.
 st.set_page_config(page_title="MoatBoy Screener", page_icon="📈")
@@ -30,6 +35,8 @@ moat = st.slider("Moat", 1, 5, (1, 5))
 # Filter the dataframe based on the widget input and reshape it.
 df_filtered = df[(df["moat"].between(moat[0], moat[1])) & (df["management"].between(management[0], management[1]))\
                  & (df["catalyst"].between(catalyst[0], catalyst[1]))]
+
+df_filtered['marketcap'] = df['ticker'].apply(get_market_cap)
 
 # Display the data as a table using `st.dataframe`.
 st.dataframe(
