@@ -55,7 +55,7 @@ df_filtered = df[(df["moat"].between(moat[0], moat[1])) & (df["management"].betw
                  & (df["catalyst"].between(catalyst[0], catalyst[1]))]
 
 df_filtered['marketcap'] = df_filtered['ticker'].apply(get_market_cap)
-# df_filtered['margin of safety (in %)'] = df_filtered.apply(mos, axis=1)
+df_filtered['margin of safety (in %)'] = df_filtered.apply(mos, axis=1)
 
 print(df_filtered.columns)
 
