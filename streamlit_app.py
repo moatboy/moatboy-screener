@@ -29,7 +29,7 @@ moat = st.slider("Moat", 1, 5, (1, 5))
 
 # Filter the dataframe based on the widget input and reshape it.
 df_filtered = df[(df["moat"].between(moat[0], moat[1])) & (df["management"].between(management[0], management[1]))\
-                 & (df["year"].between(catalyst[0], catalyst[1]))]
+                 & (df["catalyst"].between(catalyst[0], catalyst[1]))]
 
 # Display the data as a table using `st.dataframe`.
 st.dataframe(
