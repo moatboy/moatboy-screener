@@ -68,6 +68,9 @@ moat = st.slider("Moat Rating", 1, 5, (1, 5), help="**Explanation:** The moat ra
 df_filtered = df[(df["moat"].between(moat[0], moat[1])) & (df["management"].between(management[0], management[1]))\
                  & (df["catalyst"].between(catalyst[0], catalyst[1]))]
 
+df_filtered['management'] = df_filtered['management'].apply(lambda x: f"{x}/5")
+df_filtered['moat'] = df_filtered['moat'].apply(lambda x: f"{x}/5")
+df_filtered['catalyst'] = df_filtered['catalyst'].apply(lambda x: f"{x}/5")
 df_filtered['marketcap'] = df_filtered['ticker'].apply(get_market_cap)
 df_filtered['margin of safety'] = df_filtered.apply(mos, axis=1)
 
