@@ -49,7 +49,6 @@ st.write(
     """
 )
 
-
 # Load the data from a CSV. We're caching this so it doesn't reload every time the app
 # reruns (e.g. if the user interacts with the widgets).
 #@st.cache_data
@@ -61,16 +60,19 @@ df = load_data()
 
 # Show a slider widget with the years using `st.slider`.
 management = st.slider("Management Rating", 1, 5, (1, 5))
+st.markdown("**Explanation:** The management rating reflects the leadership quality and decision-making abilities of the company’s management.")
+
 catalyst = st.slider("Catalyst Rating", 1, 5, (1, 5))
+st.markdown("**Explanation:** The catalyst rating assesses the likelihood of an upcoming event that can trigger stock price growth.")
+
 moat = st.slider("Moat Rating", 1, 5, (1, 5))
+st.markdown("**Explanation:** The moat rating indicates the strength and sustainability of a company’s competitive advantage.")
 
 df_filtered = df[(df["moat"].between(moat[0], moat[1])) & (df["management"].between(management[0], management[1]))\
                  & (df["catalyst"].between(catalyst[0], catalyst[1]))]
 
 df_filtered['marketcap'] = df_filtered['ticker'].apply(get_market_cap)
 df_filtered['margin of safety'] = df_filtered.apply(mos, axis=1)
-
-print(df_filtered.columns)
 
 # Display the data as a table using `st.dataframe`.
 st.dataframe(
