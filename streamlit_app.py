@@ -3,6 +3,12 @@ import pandas as pd
 import streamlit as st
 import yfinance as yf
 
+def mos(row):
+    if row['marketcap'] > row['pessimistic value']:
+        return 0
+    else:
+        return ((row['pessimistic value'] - row['marketcap']) / row['pessimistic value']) * 100
+
 def format_large_number(number):
     if number >= 1_000_000_000_000:
         return f"{number / 1_000_000_000_000:.1f}T"  # Trillions
@@ -48,7 +54,8 @@ moat = st.slider("Moat", 1, 5, (1, 5))
 df_filtered = df[(df["moat"].between(moat[0], moat[1])) & (df["management"].between(management[0], management[1]))\
                  & (df["catalyst"].between(catalyst[0], catalyst[1]))]
 
-df_filtered['marketcap (in millions)'] = df['ticker'].apply(get_market_cap)
+df_filtered['marketcap'] = df['ticker'].apply(get_market_cap)
+df_filtered['margin of safety (in %)'] = df_filtered.apply(mos, axis=1)
 
 # Display the data as a table using `st.dataframe`.
 st.dataframe(

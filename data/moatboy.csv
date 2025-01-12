@@ -1,11 +1,11 @@
-ticker,management,catalyst,moat
-AAPL,3,1,4
-MSFT,5,4,5
-GOOGL,4,3,5
-AMZN,5,2,4
-META,4,2,4
-NVDA,4,5,5
-TSLA,3,3,4
-NFLX,3,4,3
-DIS,3,2,3
-PYPL,4,3,4
+ticker,management,catalyst,moat,pessimistic value
+AAPL,3,1,4,2.3T
+MSFT,5,4,5,2.5T
+GOOGL,4,3,5,1.8T
+AMZN,5,2,4,1.7T
+META,4,2,4,800B
+NVDA,4,5,5,1.0T
+TSLA,3,3,4,800B
+NFLX,3,4,3,300B
+DIS,3,2,3,200B
+PYPL,4,3,4,400B
