@@ -60,9 +60,9 @@ def load_data():
 df = load_data()
 
 # Show a slider widget with the years using `st.slider`.
-management = st.slider("Management", 1, 5, (1, 5))
-catalyst = st.slider("Catalyst", 1, 5, (1, 5))
-moat = st.slider("Moat", 1, 5, (1, 5))
+management = st.slider("Management Rating", 1, 5, (1, 5))
+catalyst = st.slider("Catalyst Rating", 1, 5, (1, 5))
+moat = st.slider("Moat Rating", 1, 5, (1, 5))
 
 df_filtered = df[(df["moat"].between(moat[0], moat[1])) & (df["management"].between(management[0], management[1]))\
                  & (df["catalyst"].between(catalyst[0], catalyst[1]))]
