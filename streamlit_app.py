@@ -58,48 +58,12 @@ def load_data():
 
 df = load_data()
 
-st.markdown("""
-    <style>
-        .tooltip {
-            position: relative;
-            display: inline-block;
-            border-bottom: 1px dotted black;
-        }
-
-        .tooltip .tooltiptext {
-            visibility: hidden;
-            width: 200px;
-            background-color: #6c757d;
-            color: #fff;
-            text-align: center;
-            border-radius: 5px;
-            padding: 5px;
-            position: absolute;
-            z-index: 1;
-            bottom: 125%; /* Position above the tooltip text */
-            left: 50%;
-            margin-left: -100px;
-        }
-
-        .tooltip:hover .tooltiptext {
-            visibility: visible;
-        }
-    </style>
-    <div class="tooltip">
-        Management Rating
-        <span class="tooltiptext">This reflects the quality of leadership in a company.</span>
-    </div>
-""", unsafe_allow_html=True)
-
 # Show a slider widget with the years using `st.slider`.
 management = st.slider("Management Rating", 1, 5, (1, 5))
-st.markdown("**Explanation:** The management rating reflects the leadership quality and decision-making abilities of the company’s management.")
 
 catalyst = st.slider("Catalyst Rating", 1, 5, (1, 5))
-st.markdown("**Explanation:** The catalyst rating assesses the likelihood of an upcoming event that can trigger stock price growth.")
 
 moat = st.slider("Moat Rating", 1, 5, (1, 5))
-st.markdown("**Explanation:** The moat rating indicates the strength and sustainability of a company’s competitive advantage.")
 
 df_filtered = df[(df["moat"].between(moat[0], moat[1])) & (df["management"].between(management[0], management[1]))\
                  & (df["catalyst"].between(catalyst[0], catalyst[1]))]
