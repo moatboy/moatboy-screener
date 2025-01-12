@@ -3,39 +3,6 @@ import pandas as pd
 import streamlit as st
 import yfinance as yf
 
-st.markdown("""
-    <style>
-        .tooltip {
-            position: relative;
-            display: inline-block;
-            border-bottom: 1px dotted black;
-        }
-
-        .tooltip .tooltiptext {
-            visibility: hidden;
-            width: 200px;
-            background-color: #6c757d;
-            color: #fff;
-            text-align: center;
-            border-radius: 5px;
-            padding: 5px;
-            position: absolute;
-            z-index: 1;
-            bottom: 125%; /* Position above the tooltip text */
-            left: 50%;
-            margin-left: -100px;
-        }
-
-        .tooltip:hover .tooltiptext {
-            visibility: visible;
-        }
-    </style>
-    <div class="tooltip">
-        Management Rating
-        <span class="tooltiptext">This reflects the quality of leadership in a company.</span>
-    </div>
-""", unsafe_allow_html=True)
-
 def mos(row):
     marketcap = parse_formatted_number(row['marketcap'])
     pv = parse_formatted_number(row['pessimisticvalue'])
@@ -90,6 +57,39 @@ def load_data():
     return df
 
 df = load_data()
+
+st.markdown("""
+    <style>
+        .tooltip {
+            position: relative;
+            display: inline-block;
+            border-bottom: 1px dotted black;
+        }
+
+        .tooltip .tooltiptext {
+            visibility: hidden;
+            width: 200px;
+            background-color: #6c757d;
+            color: #fff;
+            text-align: center;
+            border-radius: 5px;
+            padding: 5px;
+            position: absolute;
+            z-index: 1;
+            bottom: 125%; /* Position above the tooltip text */
+            left: 50%;
+            margin-left: -100px;
+        }
+
+        .tooltip:hover .tooltiptext {
+            visibility: visible;
+        }
+    </style>
+    <div class="tooltip">
+        Management Rating
+        <span class="tooltiptext">This reflects the quality of leadership in a company.</span>
+    </div>
+""", unsafe_allow_html=True)
 
 # Show a slider widget with the years using `st.slider`.
 management = st.slider("Management Rating", 1, 5, (1, 5))
