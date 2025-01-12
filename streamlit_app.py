@@ -4,10 +4,12 @@ import streamlit as st
 import yfinance as yf
 
 def mos(row):
-    if row['marketcap'] > row['pessimisticvalue']:
+    marketcap = float(row['marketcap'][:-1])
+    pv = float(row['pessimisticvalue'][:-1])
+    if marketcap > pv:
         return 0
     else:
-        return ((row['pessimisticvalue'] - row['marketcap']) / row['pessimisticvalue']) * 100
+        return ((pv - marketcap) / pv) * 100
 
 def format_large_number(number):
     if number >= 1_000_000_000_000:
@@ -37,6 +39,7 @@ st.write(
 
 # Load the data from a CSV. We're caching this so it doesn't reload every time the app
 # reruns (e.g. if the user interacts with the widgets).
+#@st.cache_data
 def load_data():
     df = pd.read_csv("data/moatboy.csv")
     return df
