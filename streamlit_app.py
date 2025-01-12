@@ -42,9 +42,7 @@ df = load_data()
 
 # Show a slider widget with the years using `st.slider`.
 management = st.slider("Management Rating", 1, 5, (1, 5), help="**Explanation:** The management rating reflects the leadership quality and decision-making abilities of the company’s management.")
-
 catalyst = st.slider("Catalyst Rating", 1, 5, (1, 5), help="**Explanation:** The catalyst rating assesses the likelihood of an upcoming event that can trigger stock price growth.")
-
 moat = st.slider("Moat Rating", 1, 5, (1, 5), help="**Explanation:** The moat rating indicates the strength and sustainability of a company’s competitive advantage.")
 
 df_filtered = df[(df["moat"].between(moat[0], moat[1])) & (df["management"].between(management[0], management[1]))\
