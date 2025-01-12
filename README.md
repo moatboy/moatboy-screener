@@ -1,3 +1,3 @@
-# 🎬 Moatboy screener to accompany fundamental analysis
+# 🎬 Moatboy screener
 
 Goes well with https://moatboy.github.io/
