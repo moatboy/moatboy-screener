@@ -42,7 +42,6 @@ def load_data():
     df = pd.read_csv("data/moatboy.csv")
     return df
 
-
 df = load_data()
 
 # Show a slider widget with the years using `st.slider`.
@@ -53,7 +52,7 @@ moat = st.slider("Moat", 1, 5, (1, 5))
 df_filtered = df[(df["moat"].between(moat[0], moat[1])) & (df["management"].between(management[0], management[1]))\
                  & (df["catalyst"].between(catalyst[0], catalyst[1]))]
 
-df_filtered['marketcap'] = df['ticker'].apply(get_market_cap)
+df_filtered['marketcap'] = df_filtered['ticker'].apply(get_market_cap)
 # df_filtered['margin of safety (in %)'] = df_filtered.apply(mos, axis=1)
 
 print(df_filtered.columns)
