@@ -4,12 +4,25 @@ import streamlit as st
 import yfinance as yf
 
 def mos(row):
-    marketcap = float(row['marketcap'][:-1])
-    pv = float(row['pessimisticvalue'][:-1])
+    marketcap = parse_formatted_number(row['marketcap'])
+    pv = parse_formatted_number(row['pessimisticvalue'])
+
     if marketcap > pv:
-        return 0
+        return "0%"
     else:
-        return ((pv - marketcap) / pv) * 100
+        return str(round(((pv - marketcap) / pv) * 100, 1)) + "%"
+
+def parse_formatted_number(formatted):
+    multiplier = {'T': 1_000_000_000_000, 'B': 1_000_000_000, 'M': 1_000_000, 'K': 1_000}
+    
+    # Check if the last character is a known suffix
+    if formatted[-1] in multiplier:
+        value = float(formatted[:-1])  # Extract the number part
+        return int(value * multiplier[formatted[-1]])  # Multiply by the corresponding multiplier
+    else:
+        # No suffix, return as integer
+        return int(formatted)
+    
 
 def format_large_number(number):
     if number >= 1_000_000_000_000:
@@ -55,7 +68,7 @@ df_filtered = df[(df["moat"].between(moat[0], moat[1])) & (df["management"].betw
                  & (df["catalyst"].between(catalyst[0], catalyst[1]))]
 
 df_filtered['marketcap'] = df_filtered['ticker'].apply(get_market_cap)
-df_filtered['margin of safety (in %)'] = df_filtered.apply(mos, axis=1)
+df_filtered['margin of safety'] = df_filtered.apply(mos, axis=1)
 
 print(df_filtered.columns)
 
