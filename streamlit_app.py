@@ -56,8 +56,10 @@ df_filtered['catalyst'] = df_filtered['catalyst'].apply(lambda x: f"{x}/5")
 df_filtered['margin of safety'] = df_filtered.apply(mos, axis=1)
 
 # Display the data as a table using `st.dataframe`.
-st.dataframe(
-    df_filtered,
-    use_container_width=True,
-    column_config={"ticker": st.column_config.TextColumn("ticker")},
-)
+# st.dataframe(
+#     df_filtered,
+#     use_container_width=True,
+#     column_config={"ticker": st.column_config.TextColumn("ticker")},
+# )
+
+st.write(df_filtered.to_html(escape=False, index=False), unsafe_allow_html=True)
