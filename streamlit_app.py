@@ -55,6 +55,8 @@ df_filtered['moat'] = df_filtered['moat'].apply(lambda x: f"{x}/5")
 df_filtered['catalyst'] = df_filtered['catalyst'].apply(lambda x: f"{x}/5")
 df_filtered['margin of safety'] = df_filtered.apply(mos, axis=1)
 
+df_filtered["ticker"] = df_filtered["ticker"].apply(lambda x: f'<a href="https://moatboy.github.io/docs/{x}.html">{x}</a>')
+
 # Display the data as a table using `st.dataframe`.
 # st.dataframe(
 #     df_filtered,
