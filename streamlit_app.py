@@ -62,5 +62,5 @@ df_filtered['margin of safety'] = df_filtered.apply(mos, axis=1)
 #     column_config={"ticker": st.column_config.TextColumn("ticker")},
 # )
 
-st.markdown(f"# of stocks {len(df_filtered)}")
+st.markdown(f"{len(df_filtered)} Stocks")
 st.markdown(df_filtered.to_html(escape=False, index=False), unsafe_allow_html=True)
