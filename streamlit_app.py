@@ -50,7 +50,7 @@ df_filtered = df[(df["moat"].between(moat[0], moat[1])) & (df["balance_sheet_hea
 
 # DISPLAY: XYZ Stocks
 
-df_filtered['balance_sheet'] = df_filtered['balance_sheet_health'].apply(lambda x: f"{x}/5")
+df_filtered['balance_sheet_health'] = df_filtered['balance_sheet_health'].apply(lambda x: f"{x}/5")
 df_filtered['moat'] = df_filtered['moat'].apply(lambda x: f"{x}/5")
 df_filtered['understandability'] = df_filtered['understandability'].apply(lambda x: f"{x}/5")
 
