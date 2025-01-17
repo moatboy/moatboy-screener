@@ -39,25 +39,22 @@ def load_data():
     return df
 
 df = load_data()
-df['margin of safety'] = df.apply(mos, axis=1)
 
 # Show a slider widget with the years using `st.slider`.
-management = st.slider("Management Rating", 1, 5, (1, 5), help="**Explanation:** The management rating reflects the leadership quality and decision-making abilities of the company’s management.")
-catalyst = st.slider("Catalyst Rating", 1, 5, (1, 5), help="**Explanation:** The catalyst rating assesses the likelihood of an upcoming event that can trigger stock price growth.")
+balance_sheet = st.slider("balance sheet Rating", 1, 5, (1, 5), help="**Explanation:** The balance sheet rating reflects the qualtiy of its finances (debt, assets, etc.).")
+understandability = st.slider("understandability Rating", 1, 5, (1, 5), help="**Explanation:** The understandability rating assesses how easy it is for a regard to understand the business")
 moat = st.slider("Moat Rating", 1, 5, (1, 5), help="**Explanation:** The moat rating indicates the strength and sustainability of a company’s competitive advantage.")
-mosafe = st.slider("Margin of safety in % ",0, 100, (0, 100), help="Percent difference between market and intrinsic value")
 
-df_filtered = df[(df["moat"].between(moat[0], moat[1])) & (df["management"].between(management[0], management[1]))\
-                 & (df["catalyst"].between(catalyst[0], catalyst[1])) & (df["margin of safety"].between(mosafe[0], mosafe[1]))]
+df_filtered = df[(df["moat"].between(moat[0], moat[1])) & (df["balance_sheet_health"].between(balance_sheet[0], balance_sheet[1]))\
+                 & (df["understandability"].between(understandability[0], understandability[1]))]
 
 # DISPLAY: XYZ Stocks
 
-df_filtered['management'] = df_filtered['management'].apply(lambda x: f"{x}/5")
+df_filtered['balance_sheet'] = df_filtered['balance_sheet_health'].apply(lambda x: f"{x}/5")
 df_filtered['moat'] = df_filtered['moat'].apply(lambda x: f"{x}/5")
-df_filtered['catalyst'] = df_filtered['catalyst'].apply(lambda x: f"{x}/5")
+df_filtered['understandability'] = df_filtered['understandability'].apply(lambda x: f"{x}/5")
 
 df_filtered["ticker"] = df_filtered["ticker"].apply(lambda x: f'<a href="https://moatboy.github.io/docs/{x}.html">{x}</a>')
-df_filtered["margin of safety"] = df_filtered["margin of safety"].apply(lambda x: str(x) + "%")
 
 # Display the data as a table using `st.dataframe`.
 # st.dataframe(
